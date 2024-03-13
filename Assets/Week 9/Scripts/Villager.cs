@@ -84,4 +84,9 @@ public class Villager : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
+
+    public virtual ChestType CanOpen() // Without void we're not returning anything
+    {
+        return ChestType.Villager;
+    }
 }
