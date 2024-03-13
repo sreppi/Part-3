@@ -10,9 +10,9 @@ public class Villager : MonoBehaviour
 
     bool clickingOnSelf;
     bool isSelected;
-    public GameObject highlight;
+    public GameObject highlight; // Apple
 
-    Vector2 destination;
+    protected Vector2 destination;
     Vector2 movement;
     float speed = 3;
 
@@ -80,7 +80,7 @@ public class Villager : MonoBehaviour
         }
     }
 
-    void Attack()
+    protected virtual void Attack()
     {
         animator.SetTrigger("Attack");
     }
