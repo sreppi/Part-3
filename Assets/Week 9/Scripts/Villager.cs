@@ -8,13 +8,13 @@ public class Villager : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
 
-    bool clickingOnSelf;
-    bool isSelected;
+    protected bool clickingOnSelf;
+    protected bool isSelected;
     public GameObject highlight; // Apple
 
     protected Vector2 destination;
     Vector2 movement;
-    float speed = 3;
+    protected float speed = 3;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class Villager : MonoBehaviour
         highlight.SetActive(isSelected);
     }
 
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         CharacterControl.SetSelectedVillager(this);
         clickingOnSelf = true;
@@ -42,10 +42,32 @@ public class Villager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Move();
+    }
+
+    protected virtual void Update()
+    {
+        //left click: move to the click location
+        if (Input.GetMouseButtonDown(0) && isSelected && !clickingOnSelf)
+        {
+            destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        animator.SetFloat("Movement", movement.magnitude);
+
+        //right click to attack
+        if (Input.GetMouseButtonDown(1) && isSelected)
+        {
+            Attack();
+        }
+    }
+
+    protected virtual void Move()
+    {
         movement = destination - (Vector2)transform.position;
 
         //flip the x direction of the game object & children to face the direction we're walking
-        if(movement.x > 0)
+        if (movement.x > 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
@@ -61,23 +83,6 @@ public class Villager : MonoBehaviour
         }
 
         rb.MovePosition(rb.position + movement.normalized * speed * Time.deltaTime);
-    }
-
-    void Update()
-    {
-        //left click: move to the click location
-        if (Input.GetMouseButtonDown(0) && isSelected && !clickingOnSelf)
-        {
-            destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-
-        animator.SetFloat("Movement", movement.magnitude);
-
-        //right click to attack
-        if (Input.GetMouseButtonDown(1) && isSelected)
-        {
-            Attack();
-        }
     }
 
     protected virtual void Attack()
