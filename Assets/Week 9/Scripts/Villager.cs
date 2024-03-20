@@ -8,9 +8,9 @@ public class Villager : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
 
-    protected bool clickingOnSelf;
-    protected bool isSelected;
-    public GameObject highlight; // Apple
+    bool clickingOnSelf;
+    bool isSelected;
+    public GameObject highlight;
 
     protected Vector2 destination;
     Vector2 movement;
@@ -29,7 +29,7 @@ public class Villager : MonoBehaviour
         highlight.SetActive(isSelected);
     }
 
-    protected virtual void OnMouseDown()
+    private void OnMouseDown()
     {
         CharacterControl.SetSelectedVillager(this);
         clickingOnSelf = true;
@@ -42,7 +42,26 @@ public class Villager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        movement = destination - (Vector2)transform.position;
+
+        //flip the x direction of the game object & children to face the direction we're walking
+        if(movement.x > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (movement.x < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        //stop moving if we're close enough to the target
+        if (movement.magnitude < 0.1)
+        {
+            movement = Vector2.zero;
+            speed = 3;
+        }
+
+        rb.MovePosition(rb.position + movement.normalized * speed * Time.deltaTime);
     }
 
     protected virtual void Update()
@@ -62,35 +81,12 @@ public class Villager : MonoBehaviour
         }
     }
 
-    protected virtual void Move()
-    {
-        movement = destination - (Vector2)transform.position;
-
-        //flip the x direction of the game object & children to face the direction we're walking
-        if (movement.x > 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
-        else if (movement.x < 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-
-        //stop moving if we're close enough to the target
-        if (movement.magnitude < 0.1)
-        {
-            movement = Vector2.zero;
-        }
-
-        rb.MovePosition(rb.position + movement.normalized * speed * Time.deltaTime);
-    }
-
     protected virtual void Attack()
     {
         animator.SetTrigger("Attack");
     }
 
-    public virtual ChestType CanOpen() // Without void we're not returning anything
+    public virtual ChestType CanOpen()
     {
         return ChestType.Villager;
     }

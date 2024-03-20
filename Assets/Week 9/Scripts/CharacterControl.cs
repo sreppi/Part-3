@@ -1,14 +1,12 @@
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour
 {
-    public TextMeshProUGUI className;
+    public TMPro.TextMeshProUGUI currentSelection;
+    public static CharacterControl Instance;
     public static Villager SelectedVillager { get; private set; }
     public static void SetSelectedVillager(Villager villager)
     {
@@ -18,13 +16,19 @@ public class CharacterControl : MonoBehaviour
         }
         SelectedVillager = villager;
         SelectedVillager.Selected(true);
-        Debug.Log(SelectedVillager.ToString());
+        Instance.currentSelection.text = villager.ToString();
     }
 
-    void FixedUpdate()
+    private void Start()
     {
-        className = GetComponent<TextMeshProUGUI>();
-        className.text = SelectedVillager.ToString(); // I can't seem to get this to work outside of the script. This is causing a lot of issues.
+        Instance = this;
     }
 
+    /*private void Update()
+    {
+        if(SelectedVillager != null)
+        {
+            currentSelection.text = SelectedVillager.GetType().ToString();
+        }
+    }*/
 }
