@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    float acceleration;
-    float steering;
+    protected float acceleration;
+    protected float steering;
     public float forwardSpeed = 500;
     public float steeringSpeed = 100;
     Rigidbody2D rb;
@@ -17,10 +17,9 @@ public class Car : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        acceleration = Input.GetAxis("Vertical");
-        steering = Input.GetAxis("Horizontal");
+        playerControls();
     }
     private void FixedUpdate()
     {
@@ -31,5 +30,11 @@ public class Car : MonoBehaviour
             rb.AddForce(force);
         }
 
+    }
+
+    protected virtual void playerControls()
+    {
+        acceleration = Input.GetAxis("Vertical");
+        steering = Input.GetAxis("Horizontal");
     }
 }
