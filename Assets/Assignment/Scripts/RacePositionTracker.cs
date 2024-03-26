@@ -7,10 +7,12 @@ public class RacePositionTracker : MonoBehaviour
 {
     public Car car;
     public Car2 car2;
+    public Car3 car3;
     public TMPro.TextMeshProUGUI player1RacePosition;
     public TMPro.TextMeshProUGUI player2RacePosition;
     public TMPro.TextMeshProUGUI player1RaceLapPosition;
     public TMPro.TextMeshProUGUI player2RaceLapPosition;
+
     void Start()
     {
         
@@ -21,6 +23,8 @@ public class RacePositionTracker : MonoBehaviour
         player1RaceLapPosition.text = car.currentLap.ToString();
         player2RaceLapPosition.text = car2.currentLap.ToString();
 
+        // Probably need to use arrays and loops to make a better code
+        // At the moment, the yellow car's position will not affect the race position
 
         if (car.currentLap > car2.currentLap)
         {

@@ -15,6 +15,7 @@ public class Car : MonoBehaviour
     float timer = 0;
     public bool oilItem = false;
     public GameObject oilSpillPrefab;
+    public Image oilUIImage;
 
     // Checkpoint System
 
@@ -30,12 +31,22 @@ public class Car : MonoBehaviour
         point1 = GameObject.FindWithTag("PointA1");
         point2 = GameObject.FindWithTag("PointA2");
         rb = GetComponent<Rigidbody2D>();
+
+        oilUIImage.enabled = false;
     }
 
     protected virtual void Update()
     {
         playerControls();
         playerItemControls();
+        if (oilItem == true)
+        {
+            oilUIImage.enabled = true;
+        }
+        else if (oilItem == false)
+        {
+            oilUIImage.enabled = false;
+        }
     }
     public void FixedUpdate()
     {
