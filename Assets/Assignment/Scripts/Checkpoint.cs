@@ -19,7 +19,10 @@ public class Checkpoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Start the race by creating the first checkpoint
+        point1 = GameObject.FindWithTag("PointA1");
+        point2 = GameObject.FindWithTag("PointA2");
+
     }
     void FixedUpdate()
     {

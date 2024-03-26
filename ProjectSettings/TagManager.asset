@@ -5,6 +5,76 @@ TagManager:
   serializedVersion: 2
   tags:
   - Player2
+  - PointA1
+  - PointA2
+  - PointB1
+  - PointB2
+  - PointC1
+  - PointC2
+  - PointD1
+  - PointD2
+  - PointE1
+  - PointE2
+  - PointF1
+  - PointF2
+  - PointG1
+  - PointG2
+  - PointH1
+  - PointH2
+  - PointI1
+  - PointI2
+  - PointJ1
+  - PointJ2
+  - PointK1
+  - PointK2
+  - PointL1
+  - PointL2
+  - PointM1
+  - PointM2
+  - PointN1
+  - PointN2
+  - PointO1
+  - PointO2
+  - PointP1
+  - PointP2
+  - PointQ1
+  - PointQ2
+  - PointR1
+  - PointR2
+  - PointS1
+  - PointS2
+  - PointT1
+  - PointT2
+  - PointU1
+  - PointU2
+  - PointV1
+  - PointV2
+  - PointW1
+  - PointW2
+  - CheckpointA
+  - CheckpointB
+  - CheckpointC
+  - CheckpointD
+  - CheckpointE
+  - CheckpointF
+  - CheckpointG
+  - CheckpointH
+  - CheckpointI
+  - CheckpointJ
+  - CheckpointK
+  - CheckpointL
+  - CheckpointM
+  - CheckpointN
+  - CheckpointO
+  - CheckpointP
+  - CheckpointQ
+  - CheckpointR
+  - CheckpointS
+  - CheckpointT
+  - CheckpointU
+  - CheckpointV
+  - CheckpointW
+  - ItemBoxSpawner
   layers:
   - Default
   - TransparentFX

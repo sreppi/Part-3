@@ -11,4 +11,12 @@ public class Car2 : Car
         acceleration = Input.GetAxis("Vertical P2");
         steering = Input.GetAxis("Horizontal P2");
     }
+    protected override void playerItemControls()
+    {
+        if (oilItem == true && Input.GetKeyDown("e"))
+        {
+            Instantiate(oilSpillPrefab, rb.transform.position - (rb.transform.up * 2f), Quaternion.identity);
+            oilItem = false;
+        }
+    }
 }
